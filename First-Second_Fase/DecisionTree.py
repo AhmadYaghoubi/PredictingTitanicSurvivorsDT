@@ -18,16 +18,19 @@ def get_manipulated_train():
 	titanic_redundant = pd.concat(redundant, axis=1)
 	df = pd.concat((df,titanic_redundant),axis=1)
 	df = df.drop(['Pclass','Sex','Embarked'],axis=1)
+	#old method for age
 	#df['Age'] = df['Age'].interpolate()
-	
+	#new method but not efficient for age
 	#age_avg = df['Age'].mean()
 	#age_std = df['Age'].std()
 	#age_null_count = df['Age'].isnull().sum()
 	#age_null_random_list = np.random.randint(age_avg - age_std, age_avg + age_std, size=age_null_count)
 	#df['Age'][np.isnan(df['Age'])] = age_null_random_list
 	#df['Age'] = df['Age'].astype(int)
-
+	#make new clomn for titels with passed function
 	df['Title'] = df['Name'].apply(get_title)
+	#new and better than before for fill empty ages
+	#iterates through df and fill empty ages according to relation between sex, pclass, title shown in figure 
 
 	for index, row in df.iterrows():
 		if np.isnan(row['Age']):
