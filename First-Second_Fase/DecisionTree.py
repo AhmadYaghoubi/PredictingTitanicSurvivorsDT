@@ -31,7 +31,7 @@ def get_manipulated_train():
 	df['Title'] = df['Name'].apply(get_title)
 	#new and better than before for fill empty ages
 	#iterates through df and fill empty ages according to relation between sex, pclass, title shown in pic. no. 5
-	#row 1 means existence 
+	#row 1 means existence of passenger in Pclass 1
 
 	for index, row in df.iterrows():
 		if np.isnan(row['Age']):
