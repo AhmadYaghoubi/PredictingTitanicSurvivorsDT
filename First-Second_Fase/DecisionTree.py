@@ -27,10 +27,11 @@ def get_manipulated_train():
 	#age_null_random_list = np.random.randint(age_avg - age_std, age_avg + age_std, size=age_null_count)
 	#df['Age'][np.isnan(df['Age'])] = age_null_random_list
 	#df['Age'] = df['Age'].astype(int)
-	#make new clomn for titels with passed function
+	#make new column for titels with passed function
 	df['Title'] = df['Name'].apply(get_title)
 	#new and better than before for fill empty ages
-	#iterates through df and fill empty ages according to relation between sex, pclass, title shown in figure 
+	#iterates through df and fill empty ages according to relation between sex, pclass, title shown in pic. no. 5
+	#row 1 means existence 
 
 	for index, row in df.iterrows():
 		if np.isnan(row['Age']):
@@ -92,11 +93,12 @@ def get_manipulated_train():
 	df.loc[(df['Fare'] > 14.454) & (df['Fare'] <= 31), 'Fare']   = 2
 	df.loc[ df['Fare'] > 31, 'Fare'] = 3
 	df['Fare'] = df['Fare'].astype(int)
-
+	#Calculate familiSize based on SibSo and Parch and add new column as IsAlone
 	df['FamilySize'] = df['SibSp'] + df['Parch'] + 1
 	df['IsAlone'] = 0
 	df.loc[df['FamilySize'] == 1, 'IsAlone'] = 1
 	df = df.drop(['FamilySize'],axis=1)
+	#Replace less-used titels with more used titels and map number for each
 
 	df['Title'] = df['Title'].replace(['Lady', 'Countess','Capt', 'Col','Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], 'Rare')
 	df['Title'] = df['Title'].replace('Ms', 'Miss')
