@@ -5,7 +5,7 @@ from IPython.display import display # Allows the use of display() for DataFrames
 import re as re
 from DataManipulate import get_manipulated_train
 from sklearn import tree
-
+from IPython.display import display
 
 def get_manipulated_train():
 	df = pd.read_csv('../data/train.csv',header=0)
